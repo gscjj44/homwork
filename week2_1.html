@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+
+    <style>
+
+        * {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .whole {
+            width: 500px;
+            margin: auto;
+        }
+
+        .img {
+            width: 500px;
+            height: 300px;
+
+        }
+
+        .info {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1, h5 {
+            display: inline;
+        }
+
+        .order {
+            text-align: center;
+        }
+
+        .form-row col-auto {
+            margin-top: 100px;
+        }
+
+        .rate {
+            color: blue;
+        }
+
+
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET", // GET 방식으로 요청한다.
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
+                success: function (response) { // 서버에서 준 결과를 response라는 변수에 담음
+                    // console.log(response[1]['rate'])
+                    let now = response[1]['rate']; // 서버에서 준 결과를 이용해서 나머지 코드를 작성
+                    $('#ratex').text(now);
+                }
+            })
+            // 여기에 환율 API Ajax 요청을 하면 되겠죠?
+        });
+
+
+        function order() {
+            // 여기에 코드를 작성하세요.
+            // 1-1. 이름(order-name) 부분의 값을 가져오고
+            // 1-2. 만약에 빈 칸이면 alert을 띄워주세요.
+            if ($('#order-name').val() == '') {
+                alert('이름을 입력해 주세요')
+            } else if ($('#order-count').val() == '') {
+                alert('수량을 입력해 주세요')
+            } else if ($('#order-address').val() == '') {
+                alert('주소를 입력해 주세요')
+            } else if ($('#order-phone').val() == '') { //구글링 휴대폰번호 형식 검
+                alert('번호를 입력해 주세요')
+            } else {
+                alert('주문이 완료 되었습니다')
+            }
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+<div class="whole">
+    <div>
+        <img class="img"
+             src="https://blogfiles.pstatic.net/MjAyMDA3MThfMTYw/MDAxNTk1MDM1NjY1MDY3.vi-qdHViUbW8gEa5XbiUCnxEI0APY83_-NRjkIbLuzog.oDOgqPOmJL29PMWKXVostYmVZErZ4apZgtqF-Du3ea8g.JPEG.gscjj44/KakaoTalk_20200718_101427208.jpg?type=w3">
+    </div>
+    <div class="info">
+        <h1>키보드 대여</h1>
+        <h5>가격:1,000원</h5>
+
+    <p class="rate">달러-원 환율 : <span id="ratex">1,000</span> </p>
+    </div>
+    <div class="form-row align-items-center">
+
+        <p class="col-auto">
+            <label class="sr-only" for="order-name"></label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">주문자 이름</div>
+            </div>
+            <input type="text" class="form-control" id="order-name" placeholder="">
+        </div>
+        </p>
+        <p class="col-auto">
+            <label class="sr-only" for="order-count"></label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text">수량</label>
+            </div>
+            <select class="custom-select" id="order-count">
+                <option selected>--수량을 선택하세요--</option>
+                <option value="1">1</option>
+                <option value="2">1..</option>
+                <option value="3">1...</option>
+            </select>
+        </div>
+
+        <p class="col-auto">
+            <label class="sr-only" for="order-address"></label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">주소</div>
+            </div>
+            <input type="text" class="form-control" id="order-address" placeholder="">
+        </div>
+        </p>
+        <p class="col-auto">
+            <label class="sr-only" for="order-phone"></label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">전화번호</div>
+            </div>
+            <input type="text" class="form-control" id="order-phone" placeholder="">
+        </div>
+        </p>
+
+    </div>
+    <p class="order">
+        <button onclick="order()" type="button" class="btn btn-primary">주문하기</button>
+    </p>
+
+    <div class="col-auto">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">주소</th>
+                <th scope="col">전화번호</th>
+            </tr>
+            </thead>
+            <tbody id="orders-box">
+            <tr>
+                <td>최정주</td>
+                <td>1</td>
+                <td>문래동</td>
+                <td>010-0000-0000</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+
+</html>
